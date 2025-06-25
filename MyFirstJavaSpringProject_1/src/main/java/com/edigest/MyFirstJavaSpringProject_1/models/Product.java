@@ -9,6 +9,7 @@ import lombok.Setter;
 public class Product {
 
     String name;
+    String category;
     String description;
 
 }
