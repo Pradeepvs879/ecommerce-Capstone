@@ -1,5 +1,8 @@
 package com.edigest.MyFirstJavaSpringProject_1.controllers;
 
+import com.edigest.MyFirstJavaSpringProject_1.exceptions.ProductNotFoundException;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,5 +29,14 @@ public class SampleController {
     public String bookingSeat(@PathVariable("filmName")String filmName, @PathVariable("userId") int userId){
         String message = filmName+" is at 6 pm and is booked to user with id "+userId;
         return message;
+    }
+
+    @GetMapping("/pradeep/sde/{number}")
+    public ResponseEntity<String> exceptionIssue(@PathVariable("number") int number) throws ProductNotFoundException{
+        if(number < 5){
+            throw new ProductNotFoundException("Hi this exception ha ha ha..");
+        }
+        String result = "Hi "+number+" how are you";
+        return new ResponseEntity<>(result,HttpStatusCode.valueOf(200));
     }
 }
